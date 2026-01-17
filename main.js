@@ -5,10 +5,10 @@ app.enableSandbox();
 app.commandLine.appendSwitch("use-angle", "metal");
 
 const TRY_DEMO =
-"https://broker-qx.pro/sign-up/fast/?lid=1717080";
+"https://broker-qx.pro/sign-up/fast/?lid=1717086";
 
 const REGISTER =
-"https://broker-qx.pro/sign-up/?lid=1717079";
+"https://broker-qx.pro/sign-up/?lid=1717085";
 
 let mainWin = null;
 let promptWin = null;

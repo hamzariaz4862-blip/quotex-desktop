@@ -1,6 +1,6 @@
 {
   "name": "pocket-desktop",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "Desktop trading demo wrapper",
   "main": "main.js",
   "private": true,
