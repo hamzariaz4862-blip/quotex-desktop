@@ -1,0 +1,46 @@
+{
+  "name": "pocket-desktop",
+  "version": "1.0.3",
+  "description": "Desktop trading demo wrapper",
+  "main": "main.js",
+  "private": true,
+  "scripts": {
+    "start": "electron .",
+    "dist:mac": "electron-builder --mac dmg"
+  },
+  "devDependencies": {
+    "electron": "^32.0.0",
+    "electron-builder": "^24.13.3"
+  },
+  "build": {
+    "appId": "com.quotex.desktop",
+    "productName": "QuotexDesktop",
+    "copyright": "© 2026 Quotex Desktop",
+    "mac": {
+      "target": [
+        "dmg"
+      ],
+      "icon": "icon.icns",
+      "identity": null
+    },
+    "win": {
+      "target": [
+        {
+          "target": "nsis",
+          "arch": [
+            "x64"
+          ]
+        }
+      ],
+      "icon": "icon.ico",
+      "publisherName": "Pocket Desktop",
+      "signAndEditExecutable": false,
+      "verifyUpdateCodeSignature": false
+    },
+    "nsis": {
+      "oneClick": false,
+      "perMachine": false,
+      "allowToChangeInstallationDirectory": true
+    }
+  }
+}
